@@ -296,6 +296,14 @@ config:
         Tag kube.*
         Mem_Buf_Limit 5MB
         Skip_Long_Lines On
+        
+    [INPUT]
+        Name tail
+        Path /var/tmp/Roost/*.log
+        multiline.parser docker, cri
+        Tag kube.*
+        Mem_Buf_Limit 5MB
+        Skip_Long_Lines On
 
     [INPUT]
         Name systemd
@@ -316,19 +324,11 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name es
+        Name stdout
         Match kube.*
-        Host elasticsearch-master
-        Logstash_Format On
-        Retry_Limit False
-
-    [OUTPUT]
-        Name es
-        Match host.*
-        Host elasticsearch-master
-        Logstash_Format On
-        Logstash_Prefix node
-        Retry_Limit False
+        Format json
+        Json_date_key timestamp
+        Json_date_format iso8601
 
   ## https://docs.fluentbit.io/manual/pipeline/parsers
   customParsers: |
