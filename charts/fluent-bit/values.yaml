@@ -324,11 +324,10 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name stdout
+        Name file
         Match kube.*
-        Format json
-        Json_date_key timestamp
-        Json_date_format iso8601
+        Path /var/tmp/Roost
+        
 
   ## https://docs.fluentbit.io/manual/pipeline/parsers
   customParsers: |
