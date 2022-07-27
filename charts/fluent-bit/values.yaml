@@ -332,7 +332,9 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name stdout
+        Name file
+        Mkdir /tmp/logs
+        File outputs.log
         Match kube.*
         
         
