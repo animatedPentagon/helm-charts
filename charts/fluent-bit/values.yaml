@@ -333,8 +333,7 @@ config:
   outputs: |
     [OUTPUT]
         Name file
-        Mkdir /tmp/logs
-        File outputs.log
+        Format out_file
         Match kube.*
         
         
